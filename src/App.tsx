@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import { TodoList } from "./components/ItemList";
+import { TextInput } from "./components/TextInput";
+import { ITodo } from "./interface/todo";
+import { getTodoList } from "./service/todo.service";
 
 function App() {
+  const [todo, setTodo] = useState<ITodo[]>([]);
+  useEffect(() => {
+    getTodoList().then((res) => setTodo(res));
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Drag and Drop</h1>
+      <TextInput todo={todo} setTodo={setTodo} />
+      <TodoList todo={todo} setTodo={setTodo} />
     </div>
   );
 }
