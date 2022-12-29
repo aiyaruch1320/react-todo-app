@@ -2,11 +2,11 @@ import { useState } from "react";
 import { ITodo } from "../../interface/todo";
 
 export const TextInput = ({
-  todo,
-  setTodo,
+  todos,
+  addTodo,
 }: {
-  todo: ITodo[];
-  setTodo: React.Dispatch<React.SetStateAction<ITodo[]>>;
+  todos: ITodo[];
+  addTodo: (todo: ITodo) => void;
 }) => {
   const [input, setInput] = useState("");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,17 +19,14 @@ export const TextInput = ({
       return;
     }
 
-    setTodo([
-      ...todo,
-      {
-        id: String(todo.length + 1),
-        content: input,
-        completed: false,
-        order: todo.length + 1,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    ]);
+    addTodo({
+      id: String(todos.length + 1),
+      content: input,
+      completed: false,
+      order: todos.length + 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
     setInput("");
   };
   return (

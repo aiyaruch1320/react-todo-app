@@ -19,25 +19,17 @@ const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
 });
 
 export const TodoList = ({
-  todo,
-  setTodo,
+  todos,
+  sortTodos,
+  removeTodo,
 }: {
-  todo: ITodo[];
-  setTodo: React.Dispatch<React.SetStateAction<ITodo[]>>;
+  todos: ITodo[];
+  sortTodos: (result: DropResult) => void;
+  removeTodo: (id: string) => void;
 }) => {
-  const onDragEnd = (result: DropResult) => {
-    const { source, destination } = result;
-    if (!destination) return;
-
-    const items = Array.from(todo);
-    const [newOrder] = items.splice(source.index, 1);
-    items.splice(destination.index, 0, newOrder);
-
-    setTodo(items);
-  };
   return (
     <>
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext onDragEnd={sortTodos}>
         <Droppable droppableId="todo">
           {(provided) => (
             <div
@@ -45,7 +37,7 @@ export const TodoList = ({
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {todo.map((todo, index) => {
+              {todos.map((todo, index) => {
                 return (
                   <Draggable key={todo.id} draggableId={todo.id} index={index}>
                     {(provided, snapshot) => (
@@ -59,6 +51,7 @@ export const TodoList = ({
                         )}
                       >
                         {todo.content}
+                        <button onClick={() => removeTodo(todo.id)}>X</button>
                       </div>
                     )}
                   </Draggable>
