@@ -31,3 +31,11 @@ export const createTodo = async (todo: ITodoRequest) => {
     updatedAt: new Date(),
   };
 };
+
+export const sortTodoList = async (todoList: ITodo[]) => {
+  // return todoList.sort((a, b) => a.order - b.order);
+};
+
+export const deleteTodo = async (id: string) => {
+  return id;
+};
