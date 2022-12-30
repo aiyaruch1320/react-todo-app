@@ -11,7 +11,9 @@ export const createTodo = async (todo: ITodoRequest) => {
 };
 
 export const sortTodoLists = async (todoList: ITodo[]) => {
-  return httpClient.put<ITodo[]>("/todos", todoList).then((res) => res.data);
+  return httpClient
+    .put<ITodo[]>("/todos/sort", todoList)
+    .then((res) => res.data);
 };
 
 export const deleteTodo = async (id: string) => {
