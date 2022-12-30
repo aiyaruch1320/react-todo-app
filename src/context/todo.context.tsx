@@ -59,7 +59,7 @@ export const TodoWrapper = ({ children }: { children: JSX.Element }) => {
 
   const removeTodo = async (id: string) => {
     try {
-      await deleteTodo(id);
+      deleteTodo(id);
       setTodos(todos.filter((todo) => todo.id !== id));
     } catch (error) {
       console.error(error);
