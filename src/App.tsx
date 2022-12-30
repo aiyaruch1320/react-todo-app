@@ -8,7 +8,7 @@ function App() {
     <TodoWrapper>
       <>
         <div className="App">
-          <h1>List your Task!</h1>
+          <h1>Take control of your tasks!</h1>
           <TextInput />
           <TodoList />
         </div>
