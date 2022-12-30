@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DropResult } from "react-beautiful-dnd";
-import { ITodo } from "../interface/todo";
+import { ITodo, ITodoRequest } from "../interface/todo";
 import {
   createTodo,
   deleteTodo,
@@ -10,7 +10,7 @@ import {
 
 interface ITodoContext {
   todos: ITodo[];
-  addTodo: (todo: ITodo) => void;
+  addTodo: (todo: ITodoRequest) => void;
   sortTodos: (result: DropResult) => void;
   removeTodo: (id: string) => void;
 }
@@ -32,10 +32,10 @@ export const TodoWrapper = ({ children }: { children: JSX.Element }) => {
     }
   };
 
-  const addTodo = async (todo: ITodo) => {
+  const addTodo = async (todo: ITodoRequest) => {
     try {
-      await createTodo(todo);
-      setTodos([...todos, todo]);
+      const createdTodo = await createTodo(todo);
+      setTodos([...todos, createdTodo]);
     } catch (error) {
       console.error(error);
     }

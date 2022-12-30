@@ -9,18 +9,13 @@ export const TextInput = () => {
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     if (!input.trim()) {
       return;
     }
-
     addTodo({
-      id: String(todos.length + 1),
       content: input,
       completed: false,
       order: todos.length + 1,
-      createdAt: new Date(),
-      updatedAt: new Date(),
     });
     setInput("");
   };
