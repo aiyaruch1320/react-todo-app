@@ -40,7 +40,7 @@ function App() {
       return;
     }
     const newTodos = [...todos];
-    const [movedTodo] = todos.splice(result.source.index, 1);
+    const [movedTodo] = newTodos.splice(result.source.index, 1);
     newTodos.splice(result.destination.index, 0, movedTodo);
     newTodos.map((todo, index) => (todo.order = index + 1));
     try {
