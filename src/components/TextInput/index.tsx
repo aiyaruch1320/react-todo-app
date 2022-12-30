@@ -1,13 +1,8 @@
 import { useState } from "react";
-import { ITodo } from "../../interface/todo";
+import { useTodoContext } from "../../context/todo.context";
 
-export const TextInput = ({
-  todos,
-  addTodo,
-}: {
-  todos: ITodo[];
-  addTodo: (todo: ITodo) => void;
-}) => {
+export const TextInput = () => {
+  const { todos, addTodo } = useTodoContext();
   const [input, setInput] = useState("");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);

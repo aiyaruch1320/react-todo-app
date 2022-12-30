@@ -1,10 +1,5 @@
-import {
-  DragDropContext,
-  Draggable,
-  Droppable,
-  DropResult,
-} from "react-beautiful-dnd";
-import { ITodo } from "../../interface/todo";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { useTodoContext } from "../../context/todo.context";
 
 const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
   padding: 10,
@@ -18,15 +13,8 @@ const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
   ...draggableStyle,
 });
 
-export const TodoList = ({
-  todos,
-  sortTodos,
-  removeTodo,
-}: {
-  todos: ITodo[];
-  sortTodos: (result: DropResult) => void;
-  removeTodo: (id: string) => void;
-}) => {
+export const TodoList = () => {
+  const { todos, sortTodos, removeTodo } = useTodoContext();
   return (
     <>
       <DragDropContext onDragEnd={sortTodos}>
