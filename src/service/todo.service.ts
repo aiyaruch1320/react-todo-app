@@ -1,41 +1,19 @@
+import httpClient from "../client/client";
 import { ITodo } from "../interface/todo";
 import { ITodoRequest } from "./../interface/todo";
 
-export const getTodoList = async () => {
-  const listItems: ITodo[] = [
-    {
-      id: "1",
-      content: "Study Spanish",
-      completed: false,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      order: 1,
-    },
-    {
-      id: "2",
-      content: "Workout",
-      completed: false,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      order: 2,
-    },
-  ];
-  return listItems;
+export const getTodoLists = async () => {
+  return httpClient.get<ITodo[]>("/todos").then((res) => res.data);
 };
 
 export const createTodo = async (todo: ITodoRequest) => {
-  return {
-    ...todo,
-    completed: false,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
+  return httpClient.post<ITodo>("/todos", todo).then((res) => res.data);
 };
 
-export const sortTodoList = async (todoList: ITodo[]) => {
-  // return todoList.sort((a, b) => a.order - b.order);
+export const sortTodoLists = async (todoList: ITodo[]) => {
+  return httpClient.put<ITodo[]>("/todos", todoList).then((res) => res.data);
 };
 
 export const deleteTodo = async (id: string) => {
-  return id;
+  return httpClient.delete<void>(`/todos/${id}`);
 };

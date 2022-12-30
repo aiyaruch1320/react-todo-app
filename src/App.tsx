@@ -7,8 +7,8 @@ import { ITodo } from "./interface/todo";
 import {
   createTodo,
   deleteTodo,
-  getTodoList,
-  sortTodoList,
+  getTodoLists,
+  sortTodoLists,
 } from "./service/todo.service";
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
 
   const loadTodos = async () => {
     try {
-      const todoList = await getTodoList();
+      const todoList = await getTodoLists();
       setTodos(todoList);
     } catch (error) {
       console.error(error);
@@ -44,7 +44,7 @@ function App() {
     newTodos.splice(result.destination.index, 0, movedTodo);
     newTodos.map((todo, index) => (todo.order = index + 1));
     try {
-      await sortTodoList(newTodos);
+      await sortTodoLists(newTodos);
       setTodos(newTodos);
     } catch (error) {
       console.error(error);
