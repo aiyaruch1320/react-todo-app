@@ -26,7 +26,7 @@ export const TodoWrapper = ({ children }: { children: JSX.Element }) => {
   const loadTodos = async () => {
     try {
       const todoList = await getTodoLists();
-      setTodos(todoList);
+      setTodos(todoList.sort((a, b) => a.order - b.order));
     } catch (error) {
       console.error(error);
     }
