@@ -35,6 +35,9 @@ export const TodoWrapper = ({ children }: { children: JSX.Element }) => {
   const addTodo = async (todo: ITodoRequest) => {
     try {
       const createdTodo = await createTodo(todo);
+      const newTodos = [...todos, createdTodo];
+      newTodos.map((todo, index) => (todo.order = index + 1));
+      await sortTodoLists(newTodos);
       setTodos([...todos, createdTodo]);
     } catch (error) {
       console.error(error);
