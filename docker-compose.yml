@@ -3,5 +3,6 @@ services:
   todo-app:
     build: .
     image: todo-app:0.1.0
+    container_name: todo-app
     ports:
       - "3000:3000"
